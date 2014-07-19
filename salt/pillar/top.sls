@@ -1,4 +1,5 @@
 base:
   '*':
     - aws
+    - settings
     - zookeeper

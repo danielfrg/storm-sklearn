@@ -1,3 +1,17 @@
+git:
+  pkg.installed
+
+repository:
+  git.latest:
+    - name: {{ pillar['git']['repo'] }}
+    - target: /home/ubuntu/storm-sklearn
+    - rev: master
+    - force_checkout: True
+    - user: ubuntu
+    - require:
+      - pkg: git
+
+# Salt cloud
 python-pip:
   pkg.installed
 
@@ -13,7 +27,6 @@ requests:
     - require:
       - pkg: python-pip
 
-# Salt cloud files
 /etc/salt/cloud.providers:
   file.managed:
     - source: salt://salt-master/files/cloud.providers
