@@ -1,5 +1,5 @@
 base:
   'salt-master':
     - salt-master
-  'G@role:zookeeper':
+  'G@roles:zookeeper':
     - zookeeper.server
