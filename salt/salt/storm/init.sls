@@ -1,7 +1,7 @@
 {%- from 'storm/settings.sls' import storm with context %}
 
 include:
-  - storm
+  - java
 
 {{ storm.prefix }}:
   file.directory:
