@@ -62,7 +62,7 @@
 {% endfor %}
 
 # return either the id of the host or an empty string
-{%- set myid = zookeepers_host_dict.get(grains.fqdn_ip4, '').split('+')|first() %}
+{%- set myid = zookeepers_with_ids.get(grains.id, '').split('+')|first() %}
 
 {%- set zk = {} %}
 {%- do zk.update( { 'uid': uid,
