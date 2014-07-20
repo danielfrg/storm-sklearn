@@ -28,8 +28,10 @@
 {%- set real_config_dist = alt_config + '.dist' %}
 
 {%- set force_mine_update = salt['mine.send']('roles:zookeeper', 'network.get_hostname') %}
-{%- set zookeeper_host_list = salt['mine.get']('roles:zookeeper', 'network.get_hostname', 'grain').values() | sort() %}
-{%- set zookeeper_host_num  = zookeeper_host_list|length() %}
+{%- set zookeeper_host_dict = salt['mine.get']('roles:zookeeper', 'network.get_hostname', 'grain') %}
+{%- set zookeeper_ids = zookeeper_host_dict.keys() %}
+{%- set zookeeper_hosts = zookeeper_host_dict.avlues() %}
+{%- set zookeeper_host_num  = zookeeper_host_dict|length() %}
 {%- set zookeepers_with_ids = {} %}
 
 {%- if zookeeper_host_num == 0 %}
@@ -37,16 +39,16 @@
 {{ 'No zookeeper nodes are defined (you need to set roles:zookeeper at least for one node in your cluster' }}
 {%- elif zookeeper_host_num is odd %}
 # for 1, 3, 5 ... nodes just return the list
-{%- set node_count = zookeeper_host_list|length() %}
+{%- set node_count = zookeeper_host_dict|length() %}
 {%- elif zookeeper_host_num is even %}
 # for 2, 4, 6 ... nodes return (n -1)
-{%- set node_count = zookeeper_host_list|length() - 1 %}
+{%- set node_count = zookeeper_host_dict|length() - 1 %}
 {%- endif %}
 
 # yes, this is not pretty, but produces sth like:
 # {'node1': '0+node1', 'node2': '1+node2', 'node3': '2+node2'}
 {%- for i in range(node_count) %}
-{%- do zookeepers_with_ids.update({zookeeper_host_list[i] : '{0:d}'.format(i) + '+' + zookeeper_host_list[i] })  %}
+{%- do zookeepers_with_ids.update({zookeeper_ids[i] : '{0:d}'.format(i) + '+' + zookeeper_hosts[i] })  %}
 {%- endfor %}
 
 # a plain list of hostnames
@@ -60,7 +62,7 @@
 {% endfor %}
 
 # return either the id of the host or an empty string
-{%- set myid = zookeepers_with_ids.get(grains.id, '').split('+')|first() %}
+{%- set myid = zookeepers_host_dict.get(grains.fqdn_ip4, '').split('+')|first() %}
 
 {%- set zk = {} %}
 {%- do zk.update( { 'uid': uid,
