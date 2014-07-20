@@ -14,5 +14,5 @@
                       'dl_opts'         : dl_opts,
                       'prefix'          : prefix,
                       'home'            : home,
-                      'storm_real_home' : java_real_home
+                      'storm_real_home' : storm_real_home
                   }) %}
