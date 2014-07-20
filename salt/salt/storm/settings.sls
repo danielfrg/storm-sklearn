@@ -18,7 +18,7 @@
                       'dl_opts'         : dl_opts,
                       'prefix'          : prefix,
                       'home'            : home,
-                      'real_home'       : real_home
-                      'data_dir'        : data_dir
+                      'real_home'       : real_home,
+                      'data_dir'        : data_dir,
                       'nimbus_host'     : nimbus_host
 }) %}
