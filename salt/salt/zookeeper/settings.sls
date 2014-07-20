@@ -30,7 +30,7 @@
 {%- set force_mine_update = salt['mine.send']('roles:zookeeper', 'network.get_hostname') %}
 {%- set zookeeper_host_dict = salt['mine.get']('roles:zookeeper', 'network.get_hostname', 'grain') %}
 {%- set zookeeper_ids = zookeeper_host_dict.keys() %}
-{%- set zookeeper_hosts = zookeeper_host_dict.avlues() %}
+{%- set zookeeper_hosts = zookeeper_host_dict.values() %}
 {%- set zookeeper_host_num  = zookeeper_host_dict|length() %}
 {%- set zookeepers_with_ids = {} %}
 
