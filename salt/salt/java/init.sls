@@ -1,0 +1,2 @@
+include:
+  - java.java7

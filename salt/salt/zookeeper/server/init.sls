@@ -3,6 +3,7 @@
 {%- from "zookeeper/map.jinja" import zookeeper_map with context %}
 
 include:
+  - java
   - zookeeper
 
 /etc/zookeeper:
