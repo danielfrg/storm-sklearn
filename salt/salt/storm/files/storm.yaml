@@ -1,0 +1,9 @@
+storm.zookeeper.servers:
+  {%- for garbage_string in zookeepers %}
+  {%- set myid, host = garbage_string.split('+') %}
+  - {{ host }}
+  {%- endfor %}
+
+nimbus.host: "{{ storm.nimbus_host }}"
+
+storm.local.dir: "{{ storm.data_dir }}"
