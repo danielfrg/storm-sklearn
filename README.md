@@ -9,7 +9,9 @@ Fork repository and change the git repo location on both the
 `master_bootstrap.sh` script and the `salt/pillar/settings.sls` file.
 Commit and push those changes to the fork.
 
-## salt-master instance
+## Deployment
+
+### salt-master instance
 
 The salt-master is in charge of creating and managing all the other instances.
 This is going be the most manual part of the process since it
@@ -26,6 +28,7 @@ but it will need:
 2. Inside `~/storm-sklearn/salt/pillar/`:
     1. copy `aws.template.sls` to `aws.sls` and fill it with the correct values
     2. copy `zookeeper.template.sls` to `zookeeper.sls` and fill it with the correct valuesS
+    2. copy `storm.template.sls` to `storm.sls` and fill it with the correct valuesS
 
 `zookeeper.sls` example:
 
@@ -40,7 +43,7 @@ availability_zone: "us-east-1d"
 Now you can bootstrap the salt-master using itself!:
 `sudo salt '*' state.highstate` everything should be succesfull.
 
-## zookeeper quorum
+### zookeeper quorum
 
 Storm needs a zookeeper quorum for coordination.
 
@@ -58,3 +61,13 @@ Create the 3 instances in parallel:
 
 Bootstrap zookeeper in the new instances:
 `sudo salt 'zookeeper*' state.highstate --state-output=mixed`
+
+### storm cluster
+
+Create the storm nimbus instance
+
+Create a `storm.map` file in the home directory
+
+```
+workers:
+```

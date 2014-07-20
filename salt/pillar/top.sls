@@ -4,3 +4,4 @@ base:
     - java
     - settings
     - zookeeper
+    - storm
