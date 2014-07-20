@@ -27,6 +27,7 @@
 {%- set real_config_src  = real_home + '/conf' %}
 {%- set real_config_dist = alt_config + '.dist' %}
 
+{%- set force_mine_update = salt['mine.send']('roles:zookeeper', 'network.interfaces', 'eth0') %}
 {%- set zookeeper_host_list = salt['mine.get']('roles:zookeeper', 'network.interfaces', 'grain').keys() | sort() %}
 {%- set zookeeper_host_num  = zookeeper_host_list|length() %}
 {%- set zookeepers_with_ids = {} %}
