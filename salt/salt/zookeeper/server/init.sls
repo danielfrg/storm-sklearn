@@ -3,7 +3,8 @@
 {%- from "zookeeper/map.jinja" import zookeeper_map with context %}
 
 include:
-  - java
+  - sun-java
+  - sun-java.env
   - zookeeper
 
 /etc/zookeeper:
