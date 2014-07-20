@@ -7,7 +7,7 @@
 {%- set prefix         = p.get('prefix', default_prefix) %}
 
 {%- set real_home = prefix + '/' + version_name %}
-{%- set data_dir = prefix + '/' + version_name + '/' + 'data' %}
+{%- set data_dir = prefix + '/' + version_name + '/data' %}
 
 {%- set force_mine_update = salt['mine.send']('network.get_hostname') %}
 {%- set nimbus_host = salt['mine.get']('roles:storm-nimbus', 'network.get_hostname', 'grain') | first() %}
