@@ -6,4 +6,4 @@ base:
     - zookeeper.server
   'roles:storm-nimbus':
     - match: grain
-    - storm.nimbus
+    - storm
