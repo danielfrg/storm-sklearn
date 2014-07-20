@@ -1,6 +1,6 @@
 base:
   'salt-master':
     - salt-master
-  'G@roles:zookeeper':
+  'roles:zookeeper':
     - match: grain
     - zookeeper.server
