@@ -1,4 +1,4 @@
-java_home: /usr/java/default
+java_home: /usr/lib/jvm/java-7-oracle
 
 zookeeper:
     source_url: 'http://www.us.apache.org/dist/zookeeper/zookeeper-3.4.5/zookeeper-3.4.5.tar.gz'
