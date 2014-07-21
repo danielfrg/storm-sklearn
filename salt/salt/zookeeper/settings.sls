@@ -31,7 +31,7 @@
 {%- set zookeepers_host_dict = salt['mine.get']('roles:zookeeper', 'network.get_hostname', 'grain') %}
 {%- set zookeepers_ids = zookeepers_host_dict.keys() %}
 {%- set zookeepers_hosts = zookeepers_host_dict.values() %}
-{%- set zookeeper_host_num  = zookeepers_host_dict.keys() | length() %}
+{%- set zookeeper_host_num  = zookeepers_ids | length() %}
 {%- set zookeepers_with_ids = {} %}
 {%- set connection_string = [] %}
 
@@ -47,6 +47,7 @@
 {%- elif zookeeper_host_num is even %}
 # for 2, 4, 6 ... nodes return (n -1)
 {%- set node_count = zookeepers_host_dict|length() - 1 %}
+{%- endif %} # if zookeeper_host_num == 0
 
 {%- if node_count > 0 %}
 # yes, this is not pretty, but produces sth like:
@@ -54,7 +55,6 @@
 {%- for i in range(node_count) %}
 {%- do zookeepers_with_ids.update({zookeepers_ids[i] : '{0:d}'.format(i) + '+' + zookeepers_hosts[i] })  %}
 {%- endfor %}
-
 # a plain list of hostnames
 {%- set zookeepers = zookeepers_with_ids.keys()|sort() %}
 # this is the 'safe bet' to use for just connection settings (backwards compatible)
@@ -63,11 +63,9 @@
 {%- for n in zookeepers %}
 {%- do connection_string.append( n + ':' + port ) %}
 {% endfor %}
-
 # return either the id of the host or an empty string
 {%- set myid = zookeepers_with_ids.get(grains.id, '').split('+')|first() %}
 {%- endif %} # if node_count > 0
-{%- endif %} # if zookeeper_host_num == 0
 
 {%- set zk = {} %}
 {%- do zk.update( { 'uid': uid,
