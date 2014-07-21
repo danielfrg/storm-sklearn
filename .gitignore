@@ -1,3 +1,5 @@
+.vagrant
+
 salt/pillar/aws.sls
 salt/pillar/zookeeper.sls
 salt/pillar/storm.sls

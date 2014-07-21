@@ -1,0 +1,9 @@
+master: localhost
+file_client: local
+
+id: vagrant-box
+
+grains:
+  roles:
+    - zookeeper
+    - storm-nimbus
