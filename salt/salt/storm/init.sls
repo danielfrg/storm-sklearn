@@ -39,7 +39,7 @@ install-storm-dist:
 supervisor:
   pkg.installed
 
-/etc/supervisord.conf:
+/etc/supervisor/supervisord-storm.conf:
   file.managed:
     - source: salt://storm/files/supervisord.conf
     - template: jinja
@@ -48,10 +48,10 @@ supervisor:
 
 supervisord:
   background.running:
-    - name: supervisord -c /etc/supervisord.conf
-    - pid: /var/run/supervisord.pid
+    - name: supervisord -c /etc/supervisor/supervisord-storm.conf
+    - pid: /var/run/supervisord-storm.pid
     - writepid: False
     - force: False
     - require:
-      - file: /etc/supervisord.conf
+      - file: /etc/supervisor/supervisord-storm.conf
       - pkg: supervisor
