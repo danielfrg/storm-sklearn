@@ -4,6 +4,7 @@ base:
   'roles:zookeeper':
     - match: grain
     - zookeeper.server
+    - zookeeper.debug
   'roles:storm-nimbus':
     - match: grain
-    - storm
+    - storm.nimbus
