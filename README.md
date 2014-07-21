@@ -30,7 +30,7 @@ but it will need:
     2. copy `zookeeper.template.sls` to `zookeeper.sls` and fill it with the correct valuesS
     2. copy `storm.template.sls` to `storm.sls` and fill it with the correct valuesS
 
-`zookeeper.sls` example:
+`zookeeper.sls` and `storm.sls` example:
 
 ```
 private_key_path: "/home/ubuntu/.ssh/daniel_keypair.pem"
@@ -64,7 +64,8 @@ Bootstrap zookeeper in the new instances:
 
 ### storm cluster
 
-Create the storm nimbus instance
+Create the storm nimbus instance:
+
 
 Create a `storm.map` file in the home directory
 
