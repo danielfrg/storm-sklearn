@@ -31,11 +31,15 @@
 {%- set zookeepers_host_dict = salt['mine.get']('roles:zookeeper', 'network.get_hostname', 'grain') %}
 {%- set zookeepers_ids = zookeepers_host_dict.keys() %}
 {%- set zookeepers_hosts = zookeepers_host_dict.values() %}
-{%- set zookeeper_host_num  = zookeepers_host_dict|length() %}
+{%- set zookeeper_host_num  = zookeepers_host_dict.keys() | length() %}
 {%- set zookeepers_with_ids = {} %}
+{%- set connection_string = [] %}
+
+{%- set zookeepers = '' %}
+{%- set myid = '' %}
+{%- set zookeeper_host = '' %}
 
 {%- if zookeeper_host_num == 0 %}
-# this will fail to even render but provide a hint as to what's wrong
 {{ 'No zookeeper nodes are defined (you need to set roles:zookeeper at least for one node in your cluster' }}
 {%- elif zookeeper_host_num is odd %}
 # for 1, 3, 5 ... nodes just return the list
@@ -43,8 +47,8 @@
 {%- elif zookeeper_host_num is even %}
 # for 2, 4, 6 ... nodes return (n -1)
 {%- set node_count = zookeepers_host_dict|length() - 1 %}
-{%- endif %}
 
+{%- if node_count > 0 %}
 # yes, this is not pretty, but produces sth like:
 # {'node1': '0+node1', 'node2': '1+node2', 'node3': '2+node2'}
 {%- for i in range(node_count) %}
@@ -55,14 +59,15 @@
 {%- set zookeepers = zookeepers_with_ids.keys()|sort() %}
 # this is the 'safe bet' to use for just connection settings (backwards compatible)
 {%- set zookeeper_host = zookeepers|first() %}
-# produce the connection string, sth. like: 'host1:2181,host2:2181,host3:2181'
-{%- set connection_string = [] %}
+# produce the connection string, sth. like: 'host1:2181,host2:2181,host3:2181
 {%- for n in zookeepers %}
 {%- do connection_string.append( n + ':' + port ) %}
 {% endfor %}
 
 # return either the id of the host or an empty string
 {%- set myid = zookeepers_with_ids.get(grains.id, '').split('+')|first() %}
+{%- endif %} # if node_count > 0
+{%- endif %} # if zookeeper_host_num == 0
 
 {%- set zk = {} %}
 {%- do zk.update( { 'uid': uid,
