@@ -45,3 +45,13 @@ supervisor:
     - template: jinja
     - context:
       storm: {{ storm }}
+
+supervisord:
+  background.running:
+    - name: supervisord -c /etc/supervisord.conf
+    - pid: /var/run/supervisord.pid
+    - writepid: False
+    - force: False
+    - require:
+      - file: /etc/supervisord.conf
+      - pkg: supervisor
