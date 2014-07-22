@@ -7,3 +7,4 @@ grains:
   roles:
     - zookeeper
     - storm-nimbus
+    - storm-supervisor

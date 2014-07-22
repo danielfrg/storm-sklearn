@@ -35,9 +35,18 @@ install-storm-dist:
     - context:
       zookeepers: {{ zk.zookeepers_with_ids }}
       storm: {{ storm }}
+    - require:
+      - cmd: install-storm-dist
 
 supervisor:
   pkg.installed
+
+/var/log/storm:
+  file.directory:
+    - makedirs: True
+    - user: root
+    - group: root
+    - mode: 755
 
 /etc/supervisor/supervisord-storm.conf:
   file.managed:
@@ -53,5 +62,6 @@ supervisord:
     - writepid: False
     - force: False
     - require:
-      - file: /etc/supervisor/supervisord-storm.conf
       - pkg: supervisor
+      - file: {{ storm.real_home }}/conf/storm.yaml
+      - file: /etc/supervisor/supervisord-storm.conf
