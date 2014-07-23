@@ -3,11 +3,10 @@ storm-sklearn
 
 From zero to storm cluster for realtime classification using scikit-learn
 
-## Before starting
+## Vagrant
 
-Fork repository and change the git repo location on both the
-`master_bootstrap.sh` script and the `salt/pillar/settings.sls` file.
-Commit and push those changes to the fork.
+For local development a single instance is created with everything you need
+to test storm.
 
 ## Deployment
 
