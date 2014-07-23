@@ -3,8 +3,8 @@ include:
 
 storm-supervisor:
   supervisord.running:
-    - conf_file: /etc/supervisor/supervisord-storm.conf
-    - restart: True
-    - update: True
+    - name: supervisor
+    - conf_file: /etc/supervisor/storm/supervisord.conf
     - require:
-      - background: supervisord
+      - cmd: supervisord
+      - file: /etc/supervisor/storm/supervisord.conf

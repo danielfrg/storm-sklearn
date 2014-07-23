@@ -3,16 +3,16 @@ include:
 
 storm-nimbus:
   supervisord.running:
-    - conf_file: /etc/supervisor/supervisord-storm.conf
-    - restart: True
-    - update: True
+    - name: nimbus
+    - conf_file: /etc/supervisor/storm/supervisord.conf
     - require:
-      - background: supervisord
+      - cmd: supervisord
+      - file: /etc/supervisor/storm/supervisord.conf
 
 storm-ui:
   supervisord.running:
-    - conf_file: /etc/supervisor/supervisord-storm.conf
-    - restart: True
-    - update: True
+    - name: ui
+    - conf_file: /etc/supervisor/storm/supervisord.conf
     - require:
-      - background: supervisord
+      - cmd: supervisord
+      - file: /etc/supervisor/storm/supervisord.conf
