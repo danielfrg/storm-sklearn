@@ -1,14 +1,21 @@
 {
     "library": "",
     "topology_specs": "topologies/",
-    "virtualenv_specs": "virtualenvs/",
+    "virtualenv_specs": "",
     "envs": {
-        "prod": {
-            "user": "",
-            "nimbus": "",
+        "local": {
+            "user": "ubuntu",
+            "nimbus": "localhost:2222",
             "workers": [],
             "log_path": "",
-            "virtualenv_root": ""
+            "virtualenv_root": "/usr/local/pyenv/versions/miniconda-3.4.2"
+        },
+        "prod": {
+            "user": "ubuntu",
+            "nimbus": "EC2.HOST",
+            "workers": [],
+            "log_path": "",
+            "virtualenv_root": "/usr/local/pyenv/versions/miniconda-3.4.2"
         }
     }
 }

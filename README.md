@@ -2,11 +2,12 @@ storm-sklearn
 =============
 
 From zero to storm cluster for realtime classification using scikit-learn
+using:
 
-## Vagrant
-
-For local development a single instance is created with everything you need
-to test storm.
+- storm (duh)
+- salt
+- streamparse
+- conda
 
 ## Deployment
 
@@ -71,3 +72,14 @@ Create a `storm.map` file in the home directory
 ```
 workers:
 ```
+
+Workers run the `storm-supervisor` daemon and a conda virutalenv is created
+for the python code to run.
+
+## Submit topology
+
+The sklearn streamparse project in this repo is a simple example on how to run
+scikit-learn inside a topology.
+
+The main difference is that streamparse is not going to create a virutalenv
+for the python code it's going to use the conda virtualenv created using salt
