@@ -3,7 +3,7 @@
     "topology_specs": "topologies/",
     "virtualenv_specs": "",
     "envs": {
-        "local": {
+        "vagrant": {
             "user": "vagrant",
             "nimbus": "default",
             "workers": [],

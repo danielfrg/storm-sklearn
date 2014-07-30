@@ -106,7 +106,7 @@ Host default
   LogLevel FATAL
 ```
 
-Then you should be able to run `sparse submit -e local`
+Then you should be able to run `sparse submit -e vagrant`
 
 ### In the cloud
 

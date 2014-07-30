@@ -2,7 +2,7 @@
   (:use     [backtype.storm.clojure])
   (:gen-class))
 
-(def wordcount
+(def  sklearn
    [
     ;; spout configuration
     {"emit-cycle-spout" (shell-spout-spec
