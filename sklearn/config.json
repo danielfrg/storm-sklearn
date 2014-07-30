@@ -4,8 +4,8 @@
     "virtualenv_specs": "",
     "envs": {
         "local": {
-            "user": "ubuntu",
-            "nimbus": "localhost:2222",
+            "user": "vagrant",
+            "nimbus": "default",
             "workers": [],
             "log_path": "",
             "virtualenv_root": "/usr/local/pyenv/versions/miniconda-3.4.2"

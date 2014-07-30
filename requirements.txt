@@ -1,0 +1,2 @@
+streamparse==0.0.13
+scikit-learn==0.15.0
