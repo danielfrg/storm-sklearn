@@ -19,6 +19,8 @@ class EmitCycle(Spout):
         row = str(self.data[self.i, :])
         if self.i >= 150:
             self.i = 0
+        else:
+            self.i = self.i + 1
         self.emit([row])
 
 

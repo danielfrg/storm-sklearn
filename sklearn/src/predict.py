@@ -31,7 +31,7 @@ class Predict(Bolt):
         row = np.fromstring(row_s[1:-1], sep=' ')
         prediction = self.clf.predict(row)
         self.emit([row_s, str(prediction)])
-        self.log('%s: %d' % (row_s, str(prediction)))
+        self.log('%s: %s' % (row_s, str(prediction)))
 
 
 if __name__ == '__main__':
