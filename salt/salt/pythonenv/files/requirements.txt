@@ -1,3 +1,4 @@
+streamparse
 numpy
 scipy
 scikit-learn
