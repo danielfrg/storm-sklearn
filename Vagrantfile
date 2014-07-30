@@ -7,6 +7,8 @@ Vagrant.configure("2") do |config|
 
   config.vm.provider :virtualbox do |vb|
     vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+    vb.memory = 1024
+    vb.cpus = 2
   end
 
   # For salt masterless, mount your file roots file root
