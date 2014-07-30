@@ -1,5 +1,9 @@
 .vagrant
+.ipynb_checkpoints/
 *.pyc
+
+data/mmap.pickle
+data/*.npy
 
 salt/pillar/aws.sls
 salt/pillar/zookeeper.sls
