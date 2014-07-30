@@ -8,11 +8,13 @@ import numpy as np
 from sklearn.externals import joblib
 
 
-class WordCounter(Bolt):
+class Predict(Bolt):
 
     def initialize(self, conf, ctx):
-        mmpath = '/Users/danielfrg/code/storm-sklearn/data/mmap.pickle'
-        model_path = '/Users/danielfrg/code/storm-sklearn/data/model.pickle'
+        # mmpath = '/Users/danielfrg/code/storm-sklearn/data/mmap.pickle'
+        # model_path = '/Users/danielfrg/code/storm-sklearn/data/model.pickle'
+        mmpath = '/var/data/storm/mmap.pickle'
+        model_path = '/var/data/storm/model.pickle'
 
         if not os.path.exists(mmpath):
             f = open(model_path, 'r')
@@ -26,11 +28,11 @@ class WordCounter(Bolt):
 
     def process(self, tup):
         row_s = tup.values[0]
-        row = np.fromstring(row_s)
+        row = np.fromstring(row_s[1:-1], sep=' ')
         prediction = self.clf.predict(row)
         self.emit([row_s, str(prediction)])
         self.log('%s: %d' % (row_s, str(prediction)))
 
 
 if __name__ == '__main__':
-    WordCounter().run()
+    Predict().run()
