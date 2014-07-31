@@ -86,6 +86,8 @@ storm-supervisor:
 Workers run the `storm-supervisor` daemon and a conda virutalenv is created
 for the python code to run, it also downloads the pickled sklearn models.
 
+Provision all storm instances: `sudo salt 'storm*' state.highstate`
+
 ## Submit topology
 
 For now you need my patched version of streamparse that does not create virutalenvs:
