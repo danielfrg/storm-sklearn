@@ -9,3 +9,9 @@ storm-nimbus:
   image: ami-80778be8
   size: m3.large
   ssh_username: ubuntu
+
+storm-supervisor:
+  provider: storm-nimbus
+  image: ami-80778be8
+  size: m3.large
+  ssh_username: ubuntu

@@ -2,7 +2,7 @@ storm-sklearn
 =============
 
 This is an example project to run a storm topology to run for making
-realtime classification based on an scikit-learn model.
+real time classification based on an scikit-learn model.
 
 One of the main differences is that streamparse is not going to create any
 virutalenvs on this case salt it's going to use the conda virtualenv
@@ -72,25 +72,31 @@ Bootstrap zookeeper in the new instances:
 ### storm cluster
 
 Create the storm nimbus instance:
-
+`sudo salt-cloud -p storm-nimbus storm-nimbus`
 
 Create a `storm.map` file in the home directory
 
 ```
-workers:
+storm-supervisor:
+  - storm-supervisor0
+  - storm-supervisor1
+  - storm-supervisor2
 ```
 
 Workers run the `storm-supervisor` daemon and a conda virutalenv is created
-for the python code to run.
+for the python code to run, it also downloads the pickled sklearn models.
 
 ## Submit topology
+
+For now you need my patched version of streamparse that does not create virutalenvs:
+https://github.com/danielfrg/streamparse
 
 ### Locally
 
 A Vagrantfile is provided with zookeeper, storm-nimbus and storm-supervisor,
 just do `vagrant up`.
 
-To submit the topology need excecute `vagrant ssh-config` and paste
+To submit the topology need execute `vagrant ssh-config` and paste
 the output in the ssh config file (`~/.ssh/config`) like:
 
 ```
