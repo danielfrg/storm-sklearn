@@ -33,9 +33,6 @@ install-storm:
     - require:
       - alternatives: install-storm
 
-supervisor:
-  pkg.installed
-
 {{ storm.data_dir }}:
   file.directory:
     - makedirs: True
@@ -43,29 +40,31 @@ supervisor:
     - group: root
     - mode: 755
 
-/var/log/supervisor/storm:
+# Supervisord
+/var/log/storm:
   file.directory:
     - makedirs: True
     - user: root
     - group: root
     - mode: 755
 
-/etc/supervisor/storm/supervisord.conf:
+storm.conf:
+  pkg.installed:
+    - name: supervisor
   file.managed:
+    - name: /etc/supervisor/conf.d/storm.conf
     - source: salt://storm/files/supervisord.conf
-    - makedirs: True
     - template: jinja
+    - makedirs: True
     - context:
       storm: {{ storm }}
       java: {{ java }}
-
-supervisord:
-  cmd.run:
-    - name: supervisord -c /etc/supervisor/storm/supervisord.conf
-    - unless: test -e /var/run/supervisord-storm.pid
     - require:
-      - pkg: supervisor
-      - file: install-storm
-      - file: {{ storm.data_dir }}
-      - file: /var/log/supervisor/storm
-      - file: /etc/supervisor/storm/supervisord.conf
+      - pkg: storm.conf
+      - file: /var/log/storm
+
+update-supervisor:
+  module.run:
+    - name: supervisord.update
+    - watch:
+      - file: storm.conf

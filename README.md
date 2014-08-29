@@ -10,7 +10,7 @@ which gives a series of advantages.
 
 This mainly project uses:
 
-- storm (duh)
+- storm
 - salt
 - streamparse
 - scikit-learn
@@ -40,8 +40,8 @@ but it will need:
 `zookeeper.sls` and `storm.sls` example:
 
 ```
-private_key_path: "/home/ubuntu/.ssh/daniel_keypair.pem"
-private_key_name: "daniel_keypair"
+private_key_path: "/home/ubuntu/.ssh/your_keypair.pem"
+private_key_name: "your_keypair"
 security_group: "open"
 location: "us-east-1"
 availability_zone: "us-east-1d"
@@ -83,15 +83,14 @@ storm-supervisor:
   - storm-supervisor2
 ```
 
+Create the 3 instances in parallel:
+`sudo salt-cloud --map=/home/ubuntu/storm.map --parallel`
+
 Workers run the `storm-supervisor` daemon and a conda virutalenv is created
 for the python code to run, it also downloads the pickled sklearn models.
-
-Provision all storm instances: `sudo salt 'storm*' state.highstate`
+Provision all storm instances by running: `sudo salt 'storm*' state.highstate`
 
 ## Submit topology
-
-For now you need my patched version of streamparse that does not create virutalenvs:
-https://github.com/danielfrg/streamparse
 
 ### Locally
 

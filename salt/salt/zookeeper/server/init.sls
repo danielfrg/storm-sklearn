@@ -4,7 +4,6 @@
 
 include:
   - sun-java
-  - sun-java.env
   - zookeeper
 
 /etc/zookeeper:
@@ -86,6 +85,7 @@ zookeeper-service:
     - name: zookeeper
     - enable: true
     - require:
+      - sls: sun-java
       - file: {{ zk.data_dir }}
 {%- endif %}
 {%- endif %}

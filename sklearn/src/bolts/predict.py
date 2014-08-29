@@ -11,8 +11,6 @@ from sklearn.externals import joblib
 class Predict(Bolt):
 
     def initialize(self, conf, ctx):
-        # mmpath = '/Users/danielfrg/code/storm-sklearn/data/mmap.pickle'
-        # model_path = '/Users/danielfrg/code/storm-sklearn/data/model.pickle'
         mmpath = '/var/data/storm/mmap.pickle'
         model_path = '/var/data/storm/model.pickle'
 

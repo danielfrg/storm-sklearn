@@ -1,17 +1,13 @@
-pyenv:
-  pkg.installed:
-    - names:
-      - git
-      - build-essential
-  pyenv.installed:
-    - name: miniconda-3.4.2
-    - require:
-      - pkg: pyenv
+include:
+  - conda
 
-conda-env:
+build-essential:
+  pkg.installed
+
+sklearn:
   conda.managed:
-    - conda: /usr/local/pyenv/versions/miniconda-3.4.2/bin/conda
-    - env_path: /usr/local/pyenv/versions/miniconda-3.4.2
+    - name: /home/ubuntu/envs/sklearn
     - requirements: salt://pythonenv/files/requirements.txt
+    - user: ubuntu
     - require:
-      - pyenv: pyenv
+      - sls: conda

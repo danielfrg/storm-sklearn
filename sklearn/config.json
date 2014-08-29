@@ -8,14 +8,14 @@
             "nimbus": "default",
             "workers": [],
             "log_path": "",
-            "virtualenv_root": "/usr/local/pyenv/versions/miniconda-3.4.2"
+            "virtualenv_root": "/home/ubuntu/envs"
         },
         "prod": {
             "user": "ubuntu",
             "nimbus": "EC2.HOST",
             "workers": [],
             "log_path": "",
-            "virtualenv_root": "/usr/local/pyenv/versions/miniconda-3.4.2"
+            "virtualenv_root": "/home/ubuntu/envs"
         }
     }
 }

@@ -3,11 +3,15 @@
 # require a source_url - there is no default download location for a jdk
 {%- if java.source_url is defined %}
 
+include:
+  - sun-java.env
+
 {{ java.prefix }}:
   file.directory:
     - user: root
     - group: root
     - mode: 755
+    - makedirs: True
 
 unpack-jdk-tarball:
   cmd.run:
